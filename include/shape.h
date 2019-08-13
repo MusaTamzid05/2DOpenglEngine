@@ -2,16 +2,17 @@
 #define SHAPE_H
 
 #include "vector.h"
+#include "shader.h"
 
 
 namespace Shape {
 
-    class RootShape {
+    class Shape {
 
         public:
 
-            RootShape() {}
-            virtual ~RootShape() {}
+            Shape() {}
+            virtual ~Shape() { delete m_shader;}
 
             virtual void draw() = 0;
             virtual void update() = 0;
@@ -22,9 +23,16 @@ namespace Shape {
             TwoD::Vector get_pos() { return m_pos; }
 
         protected:
-
-
+            
             TwoD::Vector m_pos;
+            Shader* m_shader;
+
+            unsigned int VAO;
+            unsigned int VBO;
+            unsigned int EAO;
+
+            virtual void init_mesh() {}
+
 
     };
 };

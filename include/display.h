@@ -2,9 +2,11 @@
 #define DISPLAY_H
 
 #include <string>
+#include <vector>
 
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+#include "shape.h"
 
 namespace OpenGL {
 
@@ -31,6 +33,9 @@ namespace OpenGL {
 
             void handle_input();
             void render();
+            void update();
+
+            std::vector<Shape::Shape*> shapes;
     };
 
 };

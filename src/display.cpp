@@ -1,4 +1,5 @@
 #include "display.h"
+#include "triangle.h"
 #include <iostream>
 
 namespace OpenGL {
@@ -26,7 +27,8 @@ namespace OpenGL {
             exit(1);
         }
 
-                 
+        shapes.push_back(new Shape::Triangle());
+        
     }
 
     Display::~Display() {
@@ -55,11 +57,10 @@ namespace OpenGL {
     }
 
     void Display::run() {
-       
-
 
         while(!glfwWindowShouldClose(m_window)) {
             handle_input();
+            update();
             render();
         }
     }
@@ -71,10 +72,21 @@ namespace OpenGL {
             glfwSetWindowShouldClose(m_window , true);
     }
 
+    void Display::update() {
+
+        for(Shape::Shape* shape : shapes)
+            shape->update();
+    }
+
     void Display::render() {
 
         glClearColor(0.2f , 0.3f , 0.3f , 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+
+        for(Shape::Shape* shape : shapes)
+            shape->draw();
+
         glfwSwapBuffers(m_window);
         glfwPollEvents();
 
