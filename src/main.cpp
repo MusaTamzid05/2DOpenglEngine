@@ -1,8 +1,11 @@
-#include <iostream>
+#include "display.h"
 
 
 int main(int argc , char** argv) {
 
-    std::cout << "This is running.\n";
+
+    OpenGL::Display display;
+    display.run();
+
     return 0;
 }
