@@ -36,6 +36,8 @@ namespace OpenGL {
             void update();
 
             std::vector<Shape::Shape*> shapes;
+
+            void init_window(int width  , int height , const std::string& title );
     };
 
 };

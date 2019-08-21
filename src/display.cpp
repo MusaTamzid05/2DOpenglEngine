@@ -5,6 +5,21 @@
 namespace OpenGL {
 
     Display::Display(int width , int height , const std::string& title) {
+
+        init_window(width , height , title);
+        shapes.push_back(new Shape::Triangle());
+        
+    }
+
+    Display::~Display() {
+
+        if(m_window)
+            glfwTerminate();
+    }
+
+
+    void Display::init_window(int width  , int height , const std::string& title ) {
+
         glfw_init();
 
         m_window = glfwCreateWindow(
@@ -26,17 +41,7 @@ namespace OpenGL {
             std::cerr << "Failed to initialize glad.\n";
             exit(1);
         }
-
-        shapes.push_back(new Shape::Triangle());
-        
     }
-
-    Display::~Display() {
-
-        if(m_window)
-            glfwTerminate();
-    }
-
 
     void Display::glfw_init() {
         glfwInit();
