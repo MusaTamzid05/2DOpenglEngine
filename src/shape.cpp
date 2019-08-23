@@ -62,7 +62,7 @@ namespace Shape {
 
 
         // rotate
-        //model = glm::rotate(model , rotate , glm::vec3(0.0f , 0.0f , 0.0f));
+        model = glm::rotate(model , rotate , glm::vec3(0.0f , 0.0f , 1.0f));
 
 
         // move it back.
