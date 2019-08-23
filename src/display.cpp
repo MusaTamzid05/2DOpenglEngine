@@ -1,12 +1,17 @@
 #include "display.h"
 #include "triangle.h"
+#include "consts.h"
 #include <iostream>
+
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace OpenGL {
 
-    Display::Display(int width , int height , const std::string& title) {
+    Display::Display( const std::string& title) {
 
-        init_window(width , height , title);
+        init_window( title);
         shapes.push_back(new Shape::Triangle());
         
     }
@@ -18,13 +23,13 @@ namespace OpenGL {
     }
 
 
-    void Display::init_window(int width  , int height , const std::string& title ) {
+    void Display::init_window( const std::string& title ) {
 
         glfw_init();
 
         m_window = glfwCreateWindow(
-                width ,
-                height ,
+                Const::WIDTH,
+                Const::HEIGHT,
                 title.c_str() ,
                 nullptr,
                 nullptr);

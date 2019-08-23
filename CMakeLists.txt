@@ -40,6 +40,7 @@ set(SOURCE_FILES
     src/glad.cpp
     src/vector.cpp
     src/shader.cpp
+    src/shape.cpp
     src/triangle.cpp
     )
 

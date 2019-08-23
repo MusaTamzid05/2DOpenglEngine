@@ -3,27 +3,37 @@
 
 namespace Shape {
 
-    Triangle::Triangle() {
+    Triangle::Triangle():Shape() {
+
+        /*
+         * TODO:  top y should be 1 and bottom y should be -1
+         * for some reason here case is opposite,
+         * Need to fix this bug.
+         * */
 
         // left
-        vertices.push_back(-0.5);
-        vertices.push_back(-0.5);
+        vertices.push_back(-1.0);
+        vertices.push_back(1.0);
         vertices.push_back(0.0f);
 
 
         // right
-        vertices.push_back(0.5);
-        vertices.push_back(-0.5);
+        vertices.push_back(1.0);
+        vertices.push_back(1.0);
         vertices.push_back(0.0f);
 
 
         // top
         vertices.push_back(0.0);
-        vertices.push_back(0.5);
+        vertices.push_back(-1.0);
         vertices.push_back(0.0f);
 
         m_shader = new Shader("../shaders/basic.vs" , "../shaders/basic.fs");
         init_mesh();
+
+        m_color = Color(0 , 1 , 0 , 0);
+        m_size = TwoD::Vector(100,100);
+        m_pos = TwoD::Vector(100 , 100);
 
     }
 
@@ -53,9 +63,8 @@ namespace Shape {
 
     }
 
-    void Triangle::draw() {
+    void Triangle::draw_object() {
 
-        m_shader->use();
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 3);
     }

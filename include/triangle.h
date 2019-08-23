@@ -13,13 +13,13 @@ namespace Shape {
             Triangle();
             virtual ~Triangle();
 
-            void draw();
             void update();
 
         private:
 
             std::vector<float> vertices;
 
+            virtual void draw_object();
             void init_mesh();
 
     };

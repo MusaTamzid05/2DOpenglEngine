@@ -15,7 +15,7 @@ namespace OpenGL {
 
         public:
 
-            Display(int width = 640 , int height = 480, const std::string& title = "Window");
+            Display( const std::string& title = "Window");
             virtual ~Display();
 
             void run();
@@ -37,7 +37,7 @@ namespace OpenGL {
 
             std::vector<Shape::Shape*> shapes;
 
-            void init_window(int width  , int height , const std::string& title );
+            void init_window( const std::string& title );
     };
 
 };
