@@ -44,7 +44,7 @@ namespace Shape {
 
             unsigned int VAO;
             unsigned int VBO;
-            unsigned int EAO;
+            unsigned int EBO;
 
             virtual void init_mesh() {}
 
