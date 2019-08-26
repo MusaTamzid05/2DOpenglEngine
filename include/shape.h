@@ -15,7 +15,7 @@ namespace Shape {
             Shape();
             virtual ~Shape() { delete m_shader;}
 
-            void draw();
+            virtual void draw();
             virtual void update() = 0;
 
             void set_pos(const TwoD::Vector& pos) { m_pos = pos; }

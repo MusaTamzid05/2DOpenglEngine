@@ -1,4 +1,5 @@
 #include "display.h"
+#include "line.h"
 #include "triangle.h"
 #include "rectangle.h"
 #include "consts.h"
@@ -13,8 +14,10 @@ namespace OpenGL {
     Display::Display( const std::string& title) {
 
         init_window( title);
-        shapes.push_back(new Shape::Rectangle());
-        
+        //shapes.push_back(new Shape::Rectangle());
+
+    
+        shapes.push_back(new Shape::Line(TwoD::Vector(0 , 0) , TwoD::Vector(800 , 600)));
     }
 
     Display::~Display() {
