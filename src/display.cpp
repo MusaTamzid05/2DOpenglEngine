@@ -1,5 +1,6 @@
 #include "display.h"
 #include "triangle.h"
+#include "rectangle.h"
 #include <iostream>
 
 namespace OpenGL {
@@ -7,7 +8,7 @@ namespace OpenGL {
     Display::Display(int width , int height , const std::string& title) {
 
         init_window(width , height , title);
-        shapes.push_back(new Shape::Triangle());
+        shapes.push_back(new Shape::Rectangle());
         
     }
 

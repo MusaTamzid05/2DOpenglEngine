@@ -41,6 +41,7 @@ set(SOURCE_FILES
     src/vector.cpp
     src/shader.cpp
     src/triangle.cpp
+    src/rectangle.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
