@@ -55,8 +55,7 @@ namespace Shape {
 
     void Triangle::draw() {
 
-        m_shader->use();
-        m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));
+        Shape::draw();
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 3);
     }

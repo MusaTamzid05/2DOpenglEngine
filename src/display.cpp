@@ -3,6 +3,7 @@
 #include "rectangle.h"
 #include <iostream>
 
+#include "rotate.h"
 namespace OpenGL {
 
     Display::Display(int width , int height , const std::string& title) {
@@ -67,6 +68,8 @@ namespace OpenGL {
     void Display::run() {
 
         while(!glfwWindowShouldClose(m_window)) {
+
+
             handle_input();
             update();
             render();
@@ -82,7 +85,7 @@ namespace OpenGL {
 
     void Display::update() {
 
-        for(Shape::Shape* shape : shapes)
+        for(Shape::Shape* shape : shapes) 
             shape->update();
     }
 

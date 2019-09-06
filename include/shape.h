@@ -4,6 +4,7 @@
 #include "vector.h"
 #include "shader.h"
 #include "color.h"
+#include "rotate.h"
 
 
 namespace Shape {
@@ -12,10 +13,10 @@ namespace Shape {
 
         public:
 
-            Shape() { m_color = Color(1.0 , 0.5 , 0.2 , 1.0); }
+            Shape();
             virtual ~Shape() { delete m_shader;}
 
-            virtual void draw() = 0;
+            virtual void draw();
             virtual void update() = 0;
 
             void set_pos(const TwoD::Vector& pos) { m_pos = pos; }
@@ -25,10 +26,14 @@ namespace Shape {
             
             TwoD::Vector get_pos() { return m_pos; }
 
+
+            void rotate(const Rotate& rotate ) {m_rotate = rotate;}
+
         protected:
             
             TwoD::Vector m_pos;
             Shader* m_shader;
+            Rotate m_rotate;
 
             unsigned int VAO;
             unsigned int VBO;
