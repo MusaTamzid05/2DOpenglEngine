@@ -8,7 +8,9 @@ namespace OpenGL {
     Display::Display(int width , int height , const std::string& title) {
 
         init_window(width , height , title);
-        shapes.push_back(new Shape::Rectangle());
+        Shape::Shape* shape = new Shape::Rectangle();
+        shape->set_color(Shape::Color(1.0 , 1.0  , 0.7 , 1.0));
+        shapes.push_back(shape);
         
     }
 

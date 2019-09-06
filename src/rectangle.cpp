@@ -78,6 +78,7 @@ namespace Shape {
     void Rectangle::draw() {
 
         m_shader->use();
+        m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , 0);
     }
