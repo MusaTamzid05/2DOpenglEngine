@@ -2,6 +2,7 @@
 #include "line.h"
 #include "triangle.h"
 #include "rectangle.h"
+#include "circle.h"
 #include "consts.h"
 #include <iostream>
 
@@ -14,9 +15,9 @@ namespace OpenGL {
     Display::Display( const std::string& title) {
 
         init_window( title);
-        Shape::Shape* shape = new Shape::Triangle();
-        shape->set_rotate(30);
-        shape->set_size(10);
+        Shape::Shape* shape = new Shape::Circle(200 , 300 , 200);
+        //shape->set_rotate(30);
+        //shape->set_size(10);
         shapes.push_back(shape);
 
     
