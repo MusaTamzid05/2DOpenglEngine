@@ -21,6 +21,7 @@ namespace Shape {
             void set_pos(const TwoD::Vector& pos) { m_pos = pos; }
             void set_pos(int x , int y) { m_pos = TwoD::Vector(x , y); }
             void set_size(const TwoD::Vector& size) {m_size = size;}
+            void set_size(int size) {m_size = TwoD::Vector(size , size);}
             
             TwoD::Vector get_pos() { return m_pos; }
 
