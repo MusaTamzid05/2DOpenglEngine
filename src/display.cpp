@@ -1,15 +1,15 @@
 #include "display.h"
 #include "triangle.h"
 #include "rectangle.h"
+#include "cube.h"
 #include <iostream>
-
 #include "rotate.h"
 namespace OpenGL {
 
     Display::Display(int width , int height , const std::string& title) {
 
         init_window(width , height , title);
-        Shape::Shape* shape = new Shape::Rectangle();
+        Shape::Shape* shape = new Shape::Cube();
         shape->set_color(Shape::Color(1.0 , 1.0  , 0.7 , 1.0));
         shapes.push_back(shape);
         
@@ -45,6 +45,9 @@ namespace OpenGL {
             std::cerr << "Failed to initialize glad.\n";
             exit(1);
         }
+
+
+        glEnable(GL_DEPTH_TEST);
     }
 
     void Display::glfw_init() {
@@ -69,7 +72,6 @@ namespace OpenGL {
 
         while(!glfwWindowShouldClose(m_window)) {
 
-
             handle_input();
             update();
             render();
@@ -85,14 +87,17 @@ namespace OpenGL {
 
     void Display::update() {
 
-        for(Shape::Shape* shape : shapes) 
+        for(Shape::Shape* shape : shapes)  {
+
+            shape->rotate(Shape::Rotate(Shape::Rotate::AXIS::X ,(float)glfwGetTime()));
             shape->update();
+        }
     }
 
     void Display::render() {
 
         glClearColor(0.2f , 0.3f , 0.3f , 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
         for(Shape::Shape* shape : shapes)

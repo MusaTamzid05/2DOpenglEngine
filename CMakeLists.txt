@@ -43,6 +43,7 @@ set(SOURCE_FILES
     src/triangle.cpp
     src/rectangle.cpp
     src/shape.cpp
+    src/cube.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
