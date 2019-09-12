@@ -15,13 +15,13 @@ namespace OpenGL {
     Display::Display( const std::string& title) {
 
         init_window( title);
-        Shape::Shape* shape = new Shape::Circle(200 , 300 , 200);
+        //Shape::Shape* shape = new Shape::Circle(200 , 300 , 200);
         //shape->set_rotate(30);
         //shape->set_size(10);
-        shapes.push_back(shape);
+        //shapes.push_back(shape);
 
     
-        //shapes.push_back(new Shape::Line(TwoD::Vector(0 , 0) , TwoD::Vector(800 , 600)));
+        shapes.push_back(new Shape::Line(TwoD::Vector(300 , 0) , TwoD::Vector(200, 600)));
     }
 
     Display::~Display() {

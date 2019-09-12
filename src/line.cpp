@@ -1,5 +1,6 @@
 #include "line.h"
 #include "rectangle.h"
+#include <exception>
 
 namespace Shape {
 
@@ -41,6 +42,8 @@ namespace Shape {
     std::vector<TwoD::Vector> Line::get_bresenham_points(const TwoD::Vector& from , const TwoD::Vector& to) {
 
 
+        if(from.x >  to.x) 
+            throw std::runtime_error("Drawing line error : From cordinate is greater than to cordinate!!Try to swap the 'x' value");
         
         std::vector<TwoD::Vector> points;
 
