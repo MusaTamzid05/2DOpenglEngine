@@ -4,7 +4,6 @@ project(gl_play)
 
 set(LIB_SOURCE_FILES
     src/glad.cpp
-    src/stb_image.cpp
     )
 
 
@@ -44,6 +43,7 @@ set(SOURCE_FILES
     src/rectangle.cpp
     src/shape.cpp
     src/cube.cpp
+    src/texture_holder.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

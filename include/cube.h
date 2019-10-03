@@ -4,6 +4,10 @@
 #include "shape.h"
 #include <vector>
 
+namespace OpenGL {
+    class TextureHolder;
+};
+
 namespace Shape {
 
     class Cube : public Shape{
@@ -19,6 +23,8 @@ namespace Shape {
         private:
 
             void init_mesh(float* vertices , int sizeof_vertices);
+
+            OpenGL::TextureHolder* texture;
 
     };
 };
