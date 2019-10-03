@@ -11,7 +11,7 @@
 namespace Shape {
 
 
-    Cube::Cube():Shape() {
+    Cube::Cube():Shape(Color() , true) {
         float vertices[] = {
                 -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
                  0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
