@@ -4,11 +4,18 @@
 #include "cube.h"
 #include <iostream>
 #include "rotate.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace OpenGL {
 
-    Display::Display(int width , int height , const std::string& title) {
+    Display::Display(int width , int height , const std::string& title):
+    width(width),
+    height(height){
 
-        init_window(width , height , title);
+        init_window(title);
         Shape::Shape* shape = new Shape::Cube();
         shapes.push_back(shape);
         
@@ -21,7 +28,7 @@ namespace OpenGL {
     }
 
 
-    void Display::init_window(int width  , int height , const std::string& title ) {
+    void Display::init_window( const std::string& title ) {
 
         glfw_init();
 
@@ -87,7 +94,6 @@ namespace OpenGL {
     void Display::update() {
 
         for(Shape::Shape* shape : shapes)  {
-            //shape->rotate(Shape::Rotate(Shape::Rotate::AXIS::X ,(float)glfwGetTime()));
             shape->update();
         }
     }
@@ -97,9 +103,25 @@ namespace OpenGL {
         glClearColor(0.2f , 0.3f , 0.3f , 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // this should be inside loop, will
+        // change it as soon as we have a camera
+        
+        glm::mat4 view = glm::mat4(1.0f);
+        glm::mat4 projection = glm::mat4(1.0f);
+
+        projection = glm::perspective(
+                glm::radians(45.0f),
+                 (float)width / (float)height,
+                 0.1f,
+                 100.0f
+                );
+
+        view = glm::translate(view , glm::vec3(0.0f , 0.0f , -3.0f));
+
+
 
         for(Shape::Shape* shape : shapes)
-            shape->draw();
+            shape->draw(projection , view);
 
         glfwSwapBuffers(m_window);
         glfwPollEvents();

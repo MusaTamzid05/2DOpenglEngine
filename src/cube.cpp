@@ -95,9 +95,9 @@ namespace Shape {
 
     }
 
-    void Cube::draw() {
+    void Cube::draw(const glm::mat4& projection , const  glm::mat4 view) {
 
-        Shape::draw();
+        Shape::draw(projection , view);
         texture->bind();
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 36);

@@ -14,8 +14,11 @@ namespace Shape {
     }
 
 
-    void Shape::draw() {
+    void Shape::draw(const glm::mat4& projection , const  glm::mat4 view) {
         m_shader->use();
+        m_shader->setMat4("view" , view);
+        m_shader->setMat4("projection" , projection);
+
 
         if(m_color.color_set)
             m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));

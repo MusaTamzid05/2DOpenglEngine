@@ -75,9 +75,9 @@ namespace Shape {
 
     }
 
-    void Rectangle::draw() {
+    void Rectangle::draw(const glm::mat4& projection , const  glm::mat4 view) {
 
-        Shape::draw();
+        Shape::draw(projection , view);
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , 0);
     }

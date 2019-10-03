@@ -16,7 +16,7 @@ namespace Shape {
             Shape(const Color& color = Color());
             virtual ~Shape() { delete m_shader;}
 
-            virtual void draw();
+            virtual void draw(const glm::mat4& projection , const  glm::mat4 view);
             virtual void update() = 0;
 
             void set_pos(const TwoD::Vector& pos) { m_pos = pos; }

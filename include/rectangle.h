@@ -12,7 +12,7 @@ namespace Shape {
             Rectangle();
             virtual ~Rectangle();
 
-            void draw();
+            void draw(const glm::mat4& projection , const  glm::mat4 view);
             void update();
 
         private:

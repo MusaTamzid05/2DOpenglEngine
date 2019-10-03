@@ -17,7 +17,7 @@ namespace Shape {
             Cube();
             virtual ~Cube();
 
-            void draw();
+            void draw(const glm::mat4& projection , const  glm::mat4 view);
             void update();
 
         private:

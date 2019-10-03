@@ -53,9 +53,9 @@ namespace Shape {
 
     }
 
-    void Triangle::draw() {
+    void Triangle::draw(const glm::mat4& projection , const  glm::mat4 view) {
 
-        Shape::draw();
+        Shape::draw(projection , view);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 3);
     }

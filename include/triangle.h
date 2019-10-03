@@ -14,7 +14,7 @@ namespace Shape {
             Triangle(const Color& color);
             virtual ~Triangle();
 
-            void draw();
+            void draw(const glm::mat4& projection , const  glm::mat4 view);
             void update();
 
         private:
