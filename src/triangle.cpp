@@ -3,7 +3,7 @@
 
 namespace Shape {
 
-    Triangle::Triangle() {
+    Triangle::Triangle(const Color& color) {
 
         // left
         vertices.push_back(-0.5);

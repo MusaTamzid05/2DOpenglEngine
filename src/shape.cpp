@@ -8,16 +8,17 @@
 namespace Shape {
 
 
-
-    Shape::Shape() {
-        m_color = Color(1.0 , 0.5 , 0.2 , 1.0); 
+    Shape::Shape(const Color& color) {
+        m_color = color;
         m_rotate = Rotate(Rotate::AXIS::X , 0);
     }
 
 
     void Shape::draw() {
         m_shader->use();
-        m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));
+
+        if(m_color.color_set)
+            m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));
 
         glm::mat4 transform = glm::mat4(1.0);
 

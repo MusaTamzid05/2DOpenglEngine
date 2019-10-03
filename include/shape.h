@@ -13,7 +13,7 @@ namespace Shape {
 
         public:
 
-            Shape();
+            Shape(const Color& color = Color());
             virtual ~Shape() { delete m_shader;}
 
             virtual void draw();

@@ -10,7 +10,6 @@ namespace OpenGL {
 
         init_window(width , height , title);
         Shape::Shape* shape = new Shape::Cube();
-        shape->set_color(Shape::Color(1.0 , 1.0  , 0.7 , 1.0));
         shapes.push_back(shape);
         
     }
@@ -88,8 +87,7 @@ namespace OpenGL {
     void Display::update() {
 
         for(Shape::Shape* shape : shapes)  {
-
-            shape->rotate(Shape::Rotate(Shape::Rotate::AXIS::X ,(float)glfwGetTime()));
+            //shape->rotate(Shape::Rotate(Shape::Rotate::AXIS::X ,(float)glfwGetTime()));
             shape->update();
         }
     }

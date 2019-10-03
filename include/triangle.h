@@ -2,6 +2,7 @@
 #define TRIANGLE_H
 
 #include "shape.h"
+#include "color.h"
 #include <vector>
 
 namespace Shape {
@@ -10,7 +11,7 @@ namespace Shape {
 
         public:
 
-            Triangle();
+            Triangle(const Color& color);
             virtual ~Triangle();
 
             void draw();
