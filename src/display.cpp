@@ -2,6 +2,8 @@
 #include "triangle.h"
 #include "rectangle.h"
 #include "cube.h"
+#include "const.h"
+#include "camera.h"
 #include <iostream>
 #include "rotate.h"
 
@@ -24,9 +26,18 @@ glm::vec3 cubePositions[] = {
 
 namespace OpenGL {
 
-    Display::Display(int width , int height , const std::string& title):
-    width(width),
-    height(height){
+    Camera* Display::m_camera = new Camera(glm::vec3(0.0f , 0.0f , 3.0f));
+    bool Display::firstMouse = true;
+    float Display::lastX = WIDTH / 2;
+    float Display::lastY = HEIGHT / 2;
+
+
+    Display::Display( const std::string& title):
+    width(WIDTH),
+    height(HEIGHT),
+    deltaTime(0.0f),
+    lastFrame(0.0f)
+    {
 
         init_window(title);
 
@@ -62,6 +73,13 @@ namespace OpenGL {
 
         glfwMakeContextCurrent(m_window);
         glfwSetFramebufferSizeCallback(m_window , frame_buffer_size_callback);
+        glfwSetCursorPosCallback(m_window , mouse_callback);
+        glfwSetScrollCallback(m_window , scroll_callback);
+
+
+        // capture mouse
+
+        glfwSetInputMode(m_window , GLFW_CURSOR , GLFW_CURSOR_DISABLED);
 
         if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
             std::cerr << "Failed to initialize glad.\n";
@@ -94,6 +112,7 @@ namespace OpenGL {
 
         while(!glfwWindowShouldClose(m_window)) {
 
+            update_fps();
             handle_input();
             update();
             render();
@@ -105,6 +124,20 @@ namespace OpenGL {
 
         if(glfwGetKey(m_window , GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(m_window , true);
+
+
+        if(glfwGetKey(m_window , GLFW_KEY_W) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(FORWARD , deltaTime);
+
+        if(glfwGetKey(m_window , GLFW_KEY_S) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(BACKWARD, deltaTime);
+
+        if(glfwGetKey(m_window , GLFW_KEY_A) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(LEFT, deltaTime);
+
+        if(glfwGetKey(m_window , GLFW_KEY_D) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(RIGHT, deltaTime);
+
     }
 
     void Display::update() {
@@ -126,13 +159,13 @@ namespace OpenGL {
         glm::mat4 projection = glm::mat4(1.0f);
 
         projection = glm::perspective(
-                glm::radians(45.0f),
+                glm::radians(m_camera->Zoom),
                  (float)width / (float)height,
                  0.1f,
                  100.0f
                 );
 
-        view = glm::translate(view , glm::vec3(0.0f , 0.0f , -3.0f));
+        view = m_camera->GetViewMatrix();
 
         for(unsigned int i = 0 ; i < shapes.size() ; i++)  {
 
@@ -154,6 +187,40 @@ namespace OpenGL {
         glfwSwapBuffers(m_window);
         glfwPollEvents();
 
+    }
+
+
+    void Display::mouse_callback(GLFWwindow* window,
+                    double xpos,
+                    double ypos) {
+
+        if(firstMouse) {
+            lastX = xpos;
+            lastY = ypos;
+            firstMouse = false;
+        }
+
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos;
+
+        lastX = xpos;
+        lastY = ypos;
+        m_camera->ProcessMouseMovement(xoffset , yoffset);
+    }
+
+
+    void Display::scroll_callback(GLFWwindow* window,
+                    double xoffset,
+                    double yoffset) {
+
+        m_camera->ProcessMouseScroll(yoffset);
+    }
+
+    void Display::update_fps() {
+
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
     }
 
 };

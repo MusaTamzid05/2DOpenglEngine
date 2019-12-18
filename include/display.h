@@ -11,11 +11,14 @@
 namespace OpenGL {
 
 
+    class Camera;
+
+
     class Display {
 
         public:
 
-            Display(int width = 640 , int height = 480, const std::string& title = "Window");
+            Display(const std::string& title = "Window");
             virtual ~Display();
 
             void run();
@@ -31,8 +34,14 @@ namespace OpenGL {
                     int height
                     );
 
+            static void  mouse_callback(GLFWwindow* window,
+                    double xpos,
+                    double ypos);
+            static void scroll_callback(GLFWwindow* window , double xoffset , double yoffset);
+
             void handle_input();
             void render();
+            void update_fps();
             void update();
 
             std::vector<Shape::Shape*> shapes;
@@ -41,6 +50,21 @@ namespace OpenGL {
 
             int width;
             int height;
+
+
+            // for camera movement
+            static bool firstMouse;
+            static float lastX;
+            static float lastY;
+
+            static Camera* m_camera;
+
+
+            // fps
+            
+            float deltaTime;
+            float lastFrame;
+
 
     };
 
