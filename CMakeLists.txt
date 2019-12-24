@@ -45,6 +45,7 @@ set(SOURCE_FILES
     src/cube.cpp
     src/texture_holder.cpp
     src/camera.cpp
+    src/light_cube.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

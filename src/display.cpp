@@ -1,7 +1,7 @@
 #include "display.h"
 #include "triangle.h"
 #include "rectangle.h"
-#include "cube.h"
+#include "light_cube.h"
 #include "const.h"
 #include "camera.h"
 #include <iostream>
@@ -41,8 +41,8 @@ namespace OpenGL {
 
         init_window(title);
 
-        for(unsigned int i = 0 ; i < 10 ; i++) {
-            Shape::Shape* shape = new Shape::Cube();
+        for(unsigned int i = 0 ; i < 1 ; i++) {
+            Shape::Shape* shape = new Shape::LightCube(Shape::Color(1.0 , 0.0 , 0.0));
             shapes.push_back(shape);
         }
         
@@ -170,18 +170,7 @@ namespace OpenGL {
         for(unsigned int i = 0 ; i < shapes.size() ; i++)  {
 
             shapes[i]->draw(projection , view);
-
-            glm::mat4 model = glm::mat4(1.0f);
-            float angle = 20.0f * i;
-            Shape::Rotate rotate = Shape::Rotate(1.0f ,
-                    0.3f,
-                    0.5f,
-                    angle);
-            shapes[i]->set_rotate(rotate);
             shapes[i]->set_model_pos(cubePositions[i]);
-
-
-            
         }
 
         glfwSwapBuffers(m_window);
