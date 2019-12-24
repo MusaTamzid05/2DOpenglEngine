@@ -14,7 +14,8 @@ namespace Shape {
 
         public:
 
-            Cube();
+            Cube(const Color& color = Color(1.0f , 1.0f , 1.0f));
+            Cube(const std::string&  texture_path);
             virtual ~Cube();
 
             void draw(const glm::mat4& projection , const  glm::mat4 view);
@@ -22,6 +23,8 @@ namespace Shape {
 
         private:
 
+
+            void init();
             void init_mesh(float* vertices , int sizeof_vertices);
 
             OpenGL::TextureHolder* texture;

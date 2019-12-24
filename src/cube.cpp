@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <exception>
 
 
 #include "texture_holder.h"
@@ -11,7 +12,22 @@
 namespace Shape {
 
 
-    Cube::Cube():Shape(Color() , true) {
+    Cube::Cube(const Color& color):Shape(color , true), texture(nullptr) {
+        init();
+
+    }
+
+    Cube::Cube(const std::string& texture_path) {
+        texture = new OpenGL::TextureHolder(texture_path , m_shader);
+        init();
+    }
+
+    Cube::~Cube() {
+
+    }
+
+    void Cube::init() {
+
         float vertices[] = {
                 -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
                  0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -56,18 +72,23 @@ namespace Shape {
                 -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
             };
 
-            m_shader = new Shader("../shaders/cube.vs" , "../shaders/cube.fs");
-            init_mesh(vertices , sizeof(vertices));
 
-            texture = new OpenGL::TextureHolder("../res/container.jpg" , m_shader);
-            model_pos = glm::mat4(1.0f);
+        init_mesh(vertices , sizeof(vertices));
+
+        if(texture)  {
+            m_shader = new Shader("../shaders/texture_cube.vs" , "../shaders/texture_cube.fs");
+            std::cout <<"Texture cube set.\n";
+        }
+        else if(m_color.color_set) {
+            m_shader = new Shader("../shaders/cube_color.vs" , "../shaders/cube_color.fs");
+            std::cout <<"color set.\n";
+        }
+        else
+            throw std::runtime_error("set texture path or color for the cube.");
+
+        model_pos = glm::mat4(1.0f);
 
     }
-
-    Cube::~Cube() {
-
-    }
-
     void Cube::init_mesh(float* vertices , int sizeof_vertices) {
 
 
@@ -98,8 +119,13 @@ namespace Shape {
 
     void Cube::draw(const glm::mat4& projection , const  glm::mat4 view) {
 
+        std::cout << "Drawing.\n";
+
         Shape::draw(projection , view);
-        texture->bind();
+
+        if(texture)
+            texture->bind();
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 36);
     }
