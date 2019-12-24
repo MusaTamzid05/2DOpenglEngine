@@ -60,6 +60,7 @@ namespace Shape {
             init_mesh(vertices , sizeof(vertices));
 
             texture = new OpenGL::TextureHolder("../res/container.jpg" , m_shader);
+            model_pos = glm::mat4(1.0f);
 
     }
 
