@@ -28,7 +28,7 @@ namespace Shape {
             TwoD::Vector get_pos() { return m_pos; }
 
 
-            void set_rotate(const Rotate& rotate ) {m_rotate = rotate;}
+            void set_rotate(Rotate* rotate ) {m_rotate = rotate;}
 
             void set_pos(const glm::vec3& pos);
             glm::vec3 get_pos3D() { return pos3D; }
@@ -38,7 +38,7 @@ namespace Shape {
             
             TwoD::Vector m_pos;
             Shader* m_shader;
-            Rotate m_rotate;
+            Rotate*  m_rotate;
 
 
             glm::mat4 model;

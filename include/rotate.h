@@ -1,6 +1,8 @@
 #ifndef ROTATE_H
 #define ROTATE_H
 
+#include <iostream>
+
 namespace Shape {
 
     struct Rotate {
@@ -14,20 +16,17 @@ namespace Shape {
         float angle;
         AXIS axis;
 
-        float x;
-        float y;
-        float z;
+        Rotate(AXIS axis ,float  angle):
+            axis(axis) , 
+            angle(angle){}
 
-        Rotate() {}
-        Rotate(AXIS axis ,float  angle):axis(axis) , angle(angle) {}
 
-        Rotate(float x , float y , float z , float angle)  {
-            this->x = x;
-            this->y = y;
-            this->z = z;
-            this->angle = angle;
-        }
+
+
     };
+
+
+    std::ostream& operator<<(std::ostream& out , const Rotate& rotate);
 };
 
 
