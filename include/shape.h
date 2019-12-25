@@ -23,13 +23,16 @@ namespace Shape {
             void set_pos(int x , int y) { m_pos = TwoD::Vector(x , y); }
 
             void set_color(const Color& color) { m_color = color; }
+            Color get_color() { return m_color; }
             
             TwoD::Vector get_pos() { return m_pos; }
 
 
             void set_rotate(const Rotate& rotate ) {m_rotate = rotate;}
 
-            void set_model_pos(const glm::vec3& pos);
+            void set_pos(const glm::vec3& pos);
+            glm::vec3 get_pos3D() { return pos3D; }
+
 
         protected:
             
@@ -38,7 +41,7 @@ namespace Shape {
             Rotate m_rotate;
 
 
-            glm::mat4 model_pos;
+            glm::mat4 model;
 
             unsigned int VAO;
             unsigned int VBO;
@@ -49,6 +52,8 @@ namespace Shape {
             bool shape_3D; // to check if the shape is 3D in drawing
 
             virtual void init_mesh() {}
+
+            glm::vec3 pos3D;
 
 
     };

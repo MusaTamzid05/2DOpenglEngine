@@ -1,4 +1,5 @@
 #include "shape.h"
+#include "util.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -12,18 +13,26 @@ namespace Shape {
         shape_3D(shape_3D),
         m_color(color){
         m_rotate = Rotate(Rotate::AXIS::X , 0);
+
+        model = glm::mat4(1.0f);
+        set_pos(glm::vec3(0.0,0.0,0.0));
     }
 
 
-    void Shape::set_model_pos(const glm::vec3& pos) {
+    void Shape::set_pos(const glm::vec3& pos) {
 
-        model_pos = glm::mat4(1.0f);
-        model_pos = glm::translate(model_pos , pos);
+
+        std::cout << "Setting pos.\n";
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, pos);
+        pos3D = pos;
+        Util::print_mat4(model);
+
     }
 
     void Shape::draw(const glm::mat4& projection , const  glm::mat4 view) {
 
-        // this needs to be refactor , can handle 3D and 2D graphics
+        // this needs to be refactor , can not handle 3D and 2D graphics
         // in same engine !!
 
 
@@ -34,10 +43,10 @@ namespace Shape {
         if(m_color.color_set)
             m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));
 
-        glm::mat4 model = glm::mat4(1.0);
 
         if(!shape_3D)  {
 
+            glm::mat4 model = glm::mat4(1.0);
 
             if(m_rotate.axis == Rotate::AXIS::X)
                 model = glm::rotate(model , m_rotate.angle , glm::vec3(1.0f , 0.0f , 0.0f));
@@ -54,15 +63,19 @@ namespace Shape {
 
         } else {
 
-            model_pos = glm::rotate(model_pos ,
+            /*
+            model = glm::rotate(model,
                     glm::radians(m_rotate.angle) ,
                         glm::vec3(
                         m_rotate.x,
                         m_rotate.y,
                         m_rotate.z )
                         );
+                        */
 
-            m_shader->setMat4("model" ,  model_pos);
+
+            Util::print_mat4(model);
+            m_shader->setMat4("model" ,  model);
         }
 
 
