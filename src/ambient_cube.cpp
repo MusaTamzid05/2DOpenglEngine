@@ -15,6 +15,8 @@ namespace Shape {
         ambient_strength(ambient_strength)
     {
 
+        m_shader->use();
+        m_shader->setFloat("ambientStrength" , ambient_strength);
     }
 
 
@@ -29,7 +31,6 @@ namespace Shape {
                 light_color.b
                 );
 
-        std::cout << m_color << "\n";
         m_shader->setVec3("objectColor" ,
                 m_color.r,
                 m_color.g,

@@ -1,7 +1,7 @@
 #include "display.h"
 #include "triangle.h"
 #include "rectangle.h"
-#include "specular_cube.h"
+#include "ambient_cube.h"
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
@@ -37,11 +37,10 @@ namespace OpenGL {
         shapes.push_back(cube);
 
 
-        shapes.push_back(new Shape::SpecularCube(
+        shapes.push_back(new Shape::AmbientCube(
                     cube,
-                    m_camera,
-                    0.9,
-                    Shape::Color(0.0f , 1.0f , 0.0f)
+                    Shape::Color(0.0f , 1.0f , 0.0f),
+                    0.9
                     ));
 
 
