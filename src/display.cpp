@@ -1,7 +1,7 @@
 #include "display.h"
 #include "triangle.h"
 #include "rectangle.h"
-#include "ambient_cube.h"
+#include "diffuse_cube.h"
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
@@ -32,15 +32,14 @@ namespace OpenGL {
 
         Shape::Cube* cube = new Shape::Cube(Shape::Color(1.0 , 1.0 , 1.0));
         cube->set_rotate(new Shape::Rotate(Shape::Rotate::AXIS::X, 139));
-        cube->set_pos(glm::vec3(1.0 , 1.0 , -3.0));
+        cube->set_pos(glm::vec3(1.0 , 1.0 , 2.0));
         cube->set_color(Shape::Color(1.0 , 0.5 , 0.0));
         shapes.push_back(cube);
 
 
-        shapes.push_back(new Shape::AmbientCube(
+        shapes.push_back(new Shape::DiffuseCube(
                     cube,
-                    Shape::Color(0.0f , 1.0f , 0.0f),
-                    0.5
+                    Shape::Color(0.0f , 1.0f , 0.0f)
                     ));
 
 

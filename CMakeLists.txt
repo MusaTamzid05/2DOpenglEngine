@@ -49,6 +49,7 @@ set(SOURCE_FILES
     src/util.cpp
     src/rotate.cpp
     src/ambient_cube.cpp
+    src/diffuse_cube.cpp
     src/color.cpp
     )
 
