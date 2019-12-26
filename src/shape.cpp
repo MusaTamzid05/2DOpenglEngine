@@ -39,13 +39,9 @@ namespace Shape {
         if(m_color.color_set)
             m_shader->setVec4("color" ,  glm::vec4(m_color.r , m_color.g , m_color.b , m_color.a));
 
-
-
         glm::mat4 model_after_rotate = model;
 
         if(m_rotate)  {
-
-
             if(m_rotate->axis == Rotate::AXIS::X)
                 model_after_rotate = glm::rotate(model_after_rotate , m_rotate->angle , glm::vec3(1.0f , 0.0f , 0.0f));
 
@@ -55,8 +51,6 @@ namespace Shape {
 
             else if(m_rotate->axis == Rotate::AXIS::Z)
                 model_after_rotate = glm::rotate(model_after_rotate , m_rotate->angle , glm::vec3(0.0f , 0.0f , 1.0f));
-
-
         }
 
 

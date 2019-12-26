@@ -4,10 +4,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/ext.hpp>
 #include <exception>
 
 
 #include "texture_holder.h"
+#include "util.h"
 
 namespace Shape {
 
@@ -75,18 +77,13 @@ namespace Shape {
 
         init_mesh(vertices , sizeof(vertices));
 
-        if(texture)  {
+        if(texture) 
             m_shader = new Shader("../shaders/texture_cube.vs" , "../shaders/texture_cube.fs");
-            std::cout <<"Texture cube set.\n";
-        }
-        else if(m_color.color_set) {
+        else if(m_color.color_set) 
             m_shader = new Shader("../shaders/cube_color.vs" , "../shaders/cube_color.fs");
-            std::cout <<"color set.\n";
-        }
         else
             throw std::runtime_error("set texture path or color for the cube.");
 
-        model_pos = glm::mat4(1.0f);
 
     }
     void Cube::init_mesh(float* vertices , int sizeof_vertices) {
@@ -119,7 +116,6 @@ namespace Shape {
 
     void Cube::draw(const glm::mat4& projection , const  glm::mat4 view) {
 
-        std::cout << "Drawing.\n";
 
         Shape::draw(projection , view);
 

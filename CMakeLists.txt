@@ -46,6 +46,10 @@ set(SOURCE_FILES
     src/texture_holder.cpp
     src/camera.cpp
     src/light_cube.cpp
+    src/util.cpp
+    src/rotate.cpp
+    src/ambient_cube.cpp
+    src/color.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

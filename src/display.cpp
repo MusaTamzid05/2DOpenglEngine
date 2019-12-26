@@ -1,7 +1,8 @@
 #include "display.h"
 #include "triangle.h"
 #include "rectangle.h"
-#include "light_cube.h"
+#include "ambient_cube.h"
+#include "cube.h"
 #include "const.h"
 #include "camera.h"
 #include <iostream>
@@ -11,22 +12,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-glm::vec3 cubePositions[] = {
-    glm::vec3( 0.0f,  0.0f,  0.0f),
-    glm::vec3( 2.0f,  5.0f, -15.0f),
-    glm::vec3(-1.5f, -2.2f, -2.5f),
-    glm::vec3(-3.8f, -2.0f, -12.3f),
-    glm::vec3( 2.4f, -0.4f, -3.5f),
-    glm::vec3(-1.7f,  3.0f, -7.5f),
-    glm::vec3( 1.3f, -2.0f, -2.5f),
-    glm::vec3( 1.5f,  2.0f, -2.5f),
-    glm::vec3( 1.5f,  0.2f, -1.5f),
-    glm::vec3(-1.3f,  1.0f, -1.5f)
-};
 
 namespace OpenGL {
 
-    Camera* Display::m_camera = new Camera(glm::vec3(0.0f , 0.0f , 3.0f));
+    Camera* Display::m_camera = new Camera(glm::vec3(0.0f , 0.0f , 7.0f));
     bool Display::firstMouse = true;
     float Display::lastX = WIDTH / 2;
     float Display::lastY = HEIGHT / 2;
@@ -41,10 +30,20 @@ namespace OpenGL {
 
         init_window(title);
 
-        for(unsigned int i = 0 ; i < 1 ; i++) {
-            Shape::Shape* shape = new Shape::LightCube(Shape::Color(1.0 , 0.0 , 0.0));
-            shapes.push_back(shape);
-        }
+        Shape::Cube* cube = new Shape::Cube(Shape::Color(1.0 , 1.0 , 1.0));
+        cube->set_rotate(new Shape::Rotate(Shape::Rotate::AXIS::X, 139));
+        cube->set_pos(glm::vec3(1.0 , 1.0 , -3.0));
+        cube->set_color(Shape::Color(1.0 , 0.5 , 0.0));
+        shapes.push_back(cube);
+
+
+        shapes.push_back(new Shape::AmbientCube(
+                    cube,
+                    Shape::Color(0.0f , 1.0f , 0.0f),
+                    0.5
+                    ));
+
+
         
     }
 
@@ -168,9 +167,7 @@ namespace OpenGL {
         view = m_camera->GetViewMatrix();
 
         for(unsigned int i = 0 ; i < shapes.size() ; i++)  {
-
             shapes[i]->draw(projection , view);
-            shapes[i]->set_model_pos(cubePositions[i]);
         }
 
         glfwSwapBuffers(m_window);

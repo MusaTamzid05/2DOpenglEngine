@@ -7,11 +7,20 @@
 
 
 #include "texture_holder.h"
+#include "util.h"
+#include <stdexcept>
 
 namespace Shape {
 
 
-    LightCube::LightCube(const Color& color):Shape(color , true) {
+    LightCube::LightCube(
+            const std::string& vertex_shader_path,
+            const std::string& fragment_shader_path,
+            Shape* src,
+            const Color& color):
+        src(src),
+        Shape(color , true)
+    {
         float vertices[] = {
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -56,10 +65,11 @@ namespace Shape {
             -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
             };
 
-            m_shader = new Shader("../shaders/light_cube.vs" , "../shaders/light_cube.fs");
-            init_mesh(vertices , sizeof(vertices));
 
-            model_pos = glm::mat4(1.0f);
+
+        init_mesh(vertices , sizeof(vertices));
+        m_shader = new Shader(vertex_shader_path.c_str() , fragment_shader_path.c_str());
+
 
 
     }
@@ -88,21 +98,18 @@ namespace Shape {
         glEnableVertexAttribArray(0);
 
 
-        glVertexAttribPointer(1 , 2 , GL_FLOAT , GL_FALSE , 6 * sizeof(float),(void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1 , 3 , GL_FLOAT , GL_FALSE , 6 * sizeof(float),(void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER , 0);
         glBindVertexArray(0);
 
+
     }
+
 
     void LightCube::draw(const glm::mat4& projection , const  glm::mat4 view) {
-
-        Shape::draw(projection , view);
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES , 0 , 36);
     }
-
 
     void LightCube::update() {
 

@@ -10,21 +10,29 @@ namespace OpenGL {
 
 namespace Shape {
 
-    class LightCube : public Shape{
+
+    class LightCube : public Shape {
 
         public:
 
-            LightCube(const Color& color = Color());
+
+            LightCube(
+                    const std::string& vertex_shader_path,
+                    const std::string& fragment_shader_path,
+                    Shape* src,
+                    const Color& color = Color());
             virtual ~LightCube();
 
-            void draw(const glm::mat4& projection , const  glm::mat4 view);
-            void update();
+            virtual void draw(const glm::mat4& projection , const  glm::mat4 view);
+            virtual void update();
 
-        private:
+        protected:
 
             void init_mesh(float* vertices , int sizeof_vertices);
 
             OpenGL::TextureHolder* texture;
+            Shape* src;
+
 
     };
 };

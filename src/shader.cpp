@@ -124,8 +124,10 @@ bool Shader::read_source_from(const std::string& vertex_shader_path , const std:
 
     } catch(std::ifstream::failure& e)  {
 
+        std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
         std::cout << "Failed to open shader files.\n";
         std::cerr << e.what() << "\n";
+        std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
 
         return false;
     }
