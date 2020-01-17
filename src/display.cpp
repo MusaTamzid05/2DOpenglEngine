@@ -2,6 +2,7 @@
 #include "triangle.h"
 #include "rectangle.h"
 #include "ambient_cube.h"
+#include "material_cube.h"
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
@@ -32,16 +33,18 @@ namespace OpenGL {
 
         Shape::Cube* cube = new Shape::Cube(Shape::Color(1.0 , 1.0 , 1.0));
         cube->set_rotate(new Shape::Rotate(Shape::Rotate::AXIS::X, 139));
-        cube->set_pos(glm::vec3(0.0 , 0.0 , 2.0));
+        cube->set_pos(glm::vec3(1.0 , 0.0 , 2.0));
         cube->set_color(Shape::Color(1.0 , 0.5 , 0.0));
         shapes.push_back(cube);
 
 
-        shapes.push_back(new Shape::AmbientCube(
+        shapes.push_back(
+                new Shape::MaterialCube(
                     cube,
-                    Shape::Color(0.0f , 1.0f , 0.0f),
-                    0.9
-                    ));
+                    m_camera,
+                    Shape::Color(0.0f , 1.0f , 0.0f)
+                    )
+                );
 
 
         

@@ -51,6 +51,7 @@ set(SOURCE_FILES
     src/ambient_cube.cpp
     src/diffuse_cube.cpp
     src/specular_cube.cpp
+    src/material_cube.cpp
     src/color.cpp
     )
 
