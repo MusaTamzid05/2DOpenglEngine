@@ -3,6 +3,7 @@
 
 #include "light_cube.h"
 #include "material.h"
+#include "light_property.h"
 #include <vector>
 
 namespace OpenGL {
@@ -32,6 +33,7 @@ namespace Shape {
 
             Material material;
             OpenGL::Camera* m_camera;
+            LightProperty light_property;
 
 
 

@@ -34,7 +34,7 @@ namespace OpenGL {
         Shape::Cube* cube = new Shape::Cube(Shape::Color(1.0 , 1.0 , 1.0));
         cube->set_rotate(new Shape::Rotate(Shape::Rotate::AXIS::X, 139));
         cube->set_pos(glm::vec3(1.0 , 0.0 , 2.0));
-        cube->set_color(Shape::Color(1.0 , 0.5 , 0.0));
+        cube->set_color(Shape::Color(1.0 , 0.0 , 0.0));
         shapes.push_back(cube);
 
 

@@ -53,6 +53,7 @@ set(SOURCE_FILES
     src/specular_cube.cpp
     src/material_cube.cpp
     src/color.cpp
+    src/light_property.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
