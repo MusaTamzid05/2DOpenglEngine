@@ -96,7 +96,6 @@ namespace Shape {
                 light_property.specular
                 );
 
-        std::cout << light_property << "\n";
 
         Shape::draw(projection , view);
         glBindVertexArray(VAO);

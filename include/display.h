@@ -12,6 +12,7 @@ namespace OpenGL {
 
 
     class Camera;
+    class InputHandler;
 
 
     class Display {
@@ -65,6 +66,7 @@ namespace OpenGL {
             float deltaTime;
             float lastFrame;
 
+            InputHandler* input_handler;
 
     };
 

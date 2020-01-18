@@ -1,6 +1,7 @@
 #include "display.h"
 #include "triangle.h"
 #include "rectangle.h"
+#include "input_handler.h"
 #include "ambient_cube.h"
 #include "material_cube.h"
 #include "cube.h"
@@ -26,7 +27,8 @@ namespace OpenGL {
     width(WIDTH),
     height(HEIGHT),
     deltaTime(0.0f),
-    lastFrame(0.0f)
+    lastFrame(0.0f),
+    input_handler(new InputHandler())
     {
 
         init_window(title);
@@ -139,6 +141,30 @@ namespace OpenGL {
 
         if(glfwGetKey(m_window , GLFW_KEY_D) == GLFW_PRESS)
             m_camera->ProcessKeyboard(RIGHT, deltaTime);
+
+        // this fucking code can be lot simpler if we ignore
+        // the command pattern.
+
+
+        if(glfwGetKey(m_window , GLFW_KEY_KP_4)) {
+            Command* left_command = input_handler->handle_input(GLFW_KEY_KP_4);
+            left_command->execute(shapes[0]);
+        }  else if(glfwGetKey(m_window , GLFW_KEY_KP_6)) {
+            Command* right_command = input_handler->handle_input(GLFW_KEY_KP_6);
+            right_command->execute(shapes[0]);
+        } else if(glfwGetKey(m_window , GLFW_KEY_KP_8)) {
+            Command* up_command = input_handler->handle_input(GLFW_KEY_KP_8);
+            up_command->execute(shapes[0]);
+        }  else if(glfwGetKey(m_window , GLFW_KEY_KP_2)) {
+            Command* down_command = input_handler->handle_input(GLFW_KEY_KP_2);
+            down_command->execute(shapes[0]);
+        } else if(glfwGetKey(m_window , GLFW_KEY_KP_7)) {
+            Command* command = input_handler->handle_input(GLFW_KEY_KP_7);
+            command->execute(shapes[0]);
+        }  else if(glfwGetKey(m_window , GLFW_KEY_KP_9)) {
+            Command* command = input_handler->handle_input(GLFW_KEY_KP_9);
+            command->execute(shapes[0]);
+        }
 
     }
 

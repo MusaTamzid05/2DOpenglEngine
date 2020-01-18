@@ -25,7 +25,7 @@ set_target_properties(musa_gl_libs
 
     )
 
-target_link_libraries(musa_gl_libs ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} GLU GLEW glfw dl )
+target_link_libraries(musa_gl_libs ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} GLU GLEW glfw dl)
 
 
 find_package(OpenGL REQUIRED)
@@ -54,6 +54,10 @@ set(SOURCE_FILES
     src/material_cube.cpp
     src/color.cpp
     src/light_property.cpp
+    src/input_handler.cpp
+    src/move_command_x_axis.cpp
+    src/move_command_y_axis.cpp
+    src/move_command_z_axis.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
