@@ -1,5 +1,6 @@
 #include "material_cube.h"
 #include "camera.h"
+#include "util.h"
 
 
 namespace Shape {
@@ -20,27 +21,19 @@ namespace Shape {
                 Color src_color = src->get_color();
                 glm::vec3 light_color(src_color.r , src_color.g , src_color.b);
 
-                glm::vec3 diffuseColor = light_color * glm::vec3(0.5f);
-                glm::vec3 ambientColor = diffuseColor * glm::vec3(0.8);
+                glm::vec3 diffuseColor = light_color * glm::vec3(0.5);
+                glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2);
 
 
                 light_property.ambient = ambientColor;
                 light_property.diffuse = diffuseColor;
 
-                light_property.diffuse = glm::vec3(
-                        1.0,
-                        1.0,
-                        1.0
-                        );
 
                 light_property.specular = glm::vec3(
                         1.0,
                         1.0,
                         1.0
                         );
-
-
-
     }
 
 
@@ -95,7 +88,6 @@ namespace Shape {
                 "light.specular",
                 light_property.specular
                 );
-
 
         Shape::draw(projection , view);
         glBindVertexArray(VAO);

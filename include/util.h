@@ -5,5 +5,6 @@
 
 namespace Util {
     void print_mat4(const glm::mat4& mat);
+    void print_vec3(const glm::vec3& vec);
 };
 #endif
