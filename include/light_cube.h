@@ -31,6 +31,13 @@ namespace Shape {
 
         protected:
 
+            void init(float* vertices ,
+                    int sizeof_vertices ,
+                    const std::string& vertex_shader_path,
+                    const std::string& fragment_shader_path
+                    );
+
+
             virtual void init_mesh(float* vertices , int sizeof_vertices);
 
             OpenGL::TextureHolder* texture;

@@ -66,15 +66,26 @@ namespace Shape {
             };
 
 
-
-        init_mesh(vertices , sizeof(vertices));
-        m_shader = new Shader(vertex_shader_path.c_str() , fragment_shader_path.c_str());
+        init(vertices , sizeof(vertices) , vertex_shader_path , fragment_shader_path);
 
 
 
     }
 
     LightCube::~LightCube() {
+
+    }
+
+    void LightCube::init( 
+            float* vertices ,
+            int sizeof_vertices ,
+            const std::string& vertex_shader_path,
+            const std::string& fragment_shader_path
+            ) {
+
+
+        init_mesh(vertices ,sizeof_vertices);
+        m_shader = new Shader(vertex_shader_path.c_str() , fragment_shader_path.c_str());
 
     }
 
