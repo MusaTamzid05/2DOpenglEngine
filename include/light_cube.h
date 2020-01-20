@@ -21,6 +21,9 @@ namespace Shape {
                     const std::string& fragment_shader_path,
                     Shape* src,
                     const Color& color = Color());
+
+
+            LightCube() {}
             virtual ~LightCube();
 
             virtual void draw(const glm::mat4& projection , const  glm::mat4 view);
@@ -28,7 +31,7 @@ namespace Shape {
 
         protected:
 
-            void init_mesh(float* vertices , int sizeof_vertices);
+            virtual void init_mesh(float* vertices , int sizeof_vertices);
 
             OpenGL::TextureHolder* texture;
             Shape* src;
