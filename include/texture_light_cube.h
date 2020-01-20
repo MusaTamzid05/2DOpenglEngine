@@ -12,6 +12,7 @@
 
 namespace OpenGL {
     class Camera;
+    class TextureHolder;
 };
 
 
@@ -23,7 +24,9 @@ namespace Shape {
         public:
 
 
-            TextureLightCube(Shape* src , OpenGL::Camera* camera);
+            TextureLightCube(Shape* src ,
+                    OpenGL::Camera* camera,
+                    const std::string& texture_path);
 
 
             virtual ~TextureLightCube();
@@ -39,6 +42,7 @@ namespace Shape {
             OpenGL::Camera* m_camera;
             LightProperty light_property;
 
+            OpenGL::TextureHolder * m_texture_holder;
 
     };
 };

@@ -89,6 +89,7 @@ namespace Shape {
                 light_property.specular
                 );
 
+
         Shape::draw(projection , view);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 36);

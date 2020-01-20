@@ -4,6 +4,7 @@
 #include "input_handler.h"
 #include "ambient_cube.h"
 #include "material_cube.h"
+#include "texture_light_cube.h"
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
@@ -41,10 +42,10 @@ namespace OpenGL {
 
 
         shapes.push_back(
-                new Shape::MaterialCube(
+                new Shape::TextureLightCube(
                     cube,
                     m_camera,
-                    Shape::Color(0.0f , 1.0f , 0.0f)
+                    "../res/container2.png"
                     )
                 );
     }

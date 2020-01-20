@@ -23,7 +23,7 @@ namespace Shape {
                     const Color& color = Color());
 
 
-            LightCube() {}
+            LightCube(Shape* src) { this->src = src; }
             virtual ~LightCube();
 
             virtual void draw(const glm::mat4& projection , const  glm::mat4 view);
@@ -40,7 +40,6 @@ namespace Shape {
 
             virtual void init_mesh(float* vertices , int sizeof_vertices);
 
-            OpenGL::TextureHolder* texture;
             Shape* src;
 
 

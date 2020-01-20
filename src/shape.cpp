@@ -53,10 +53,7 @@ namespace Shape {
                 model_after_rotate = glm::rotate(model_after_rotate , m_rotate->angle , glm::vec3(0.0f , 0.0f , 1.0f));
         }
 
-
         m_shader->setMat4("model" ,  model_after_rotate);
-
-
 
     }
 
