@@ -10,10 +10,13 @@ namespace OpenGL {
     InputHandler::InputHandler() {
         commands.insert(std::make_pair(GLFW_KEY_KP_4 , new MoveCommandXAxis()));
         commands.insert(std::make_pair(GLFW_KEY_KP_6 , new MoveCommandXAxis(0.1)));
-        commands.insert(std::make_pair(GLFW_KEY_KP_8 , new MoveCommandYAxis()));
-        commands.insert(std::make_pair(GLFW_KEY_KP_2 , new MoveCommandYAxis(-0.1)));
-        commands.insert(std::make_pair(GLFW_KEY_KP_7 , new MoveCommandZAxis(-0.1)));
-        commands.insert(std::make_pair(GLFW_KEY_KP_9 , new MoveCommandZAxis()));
+
+        commands.insert(std::make_pair(GLFW_KEY_KP_7 , new MoveCommandYAxis()));
+        commands.insert(std::make_pair(GLFW_KEY_KP_9 , new MoveCommandYAxis(-0.1)));
+
+
+        commands.insert(std::make_pair(GLFW_KEY_KP_8, new MoveCommandZAxis(-0.1)));
+        commands.insert(std::make_pair(GLFW_KEY_KP_2 , new MoveCommandZAxis()));
     }
 
     Command* InputHandler::handle_input(int key) {
