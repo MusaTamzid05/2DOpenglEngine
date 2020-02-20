@@ -150,7 +150,7 @@ namespace Shape {
 
         m_shader->setVec3(
                 "material.specular",
-                material.diffuse
+                material.specular
                 );
 
         m_shader->setFloat(
@@ -173,8 +173,8 @@ namespace Shape {
                 light_property.specular
                 );
 
-        m_texture_holder->bind();
         Shape::draw(projection , view);
+        m_texture_holder->bind();
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 36);
     }

@@ -8,31 +8,22 @@ class Shader;
 
 namespace OpenGL {
 
-
     class TextureHolder {
 
         public:
-
-            TextureHolder(const std::string& file_path , Shader* shader);
+            TextureHolder(const std::string& path , Shader* shader);
             virtual ~TextureHolder() {}
-
             void bind();
 
         private:
 
-            void init();
-            void load_image_opengl(const std::string& file_path);
-
+            unsigned int id;
             int width;
             int height;
-            int nr_channels;
-
-            unsigned int id;
+            int nr_components;
 
             Shader* m_shader;
 
     };
-
-
 };
 #endif
