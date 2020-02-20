@@ -44,6 +44,9 @@ namespace Shape {
 
             OpenGL::TextureHolder * m_texture_holder;
 
+
+            void format_src_color(Color& src_color);
+
     };
 };
 

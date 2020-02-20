@@ -1,6 +1,7 @@
 #include "texture_light_cube.h"
 #include "texture_holder.h"
 #include "camera.h"
+#include "util.h"
 
 
 namespace Shape {
@@ -65,9 +66,11 @@ namespace Shape {
                 "../shaders/texture_light_cube.fs"
                 );
         Color src_color = src->get_color();
+        format_src_color(src_color);
+
         glm::vec3 light_color(src_color.r , src_color.g , src_color.b);
 
-        glm::vec3 diffuseColor = light_color * glm::vec3(0.5);
+        glm::vec3 diffuseColor = light_color * glm::vec3(0.8);
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2);
 
 
@@ -89,6 +92,18 @@ namespace Shape {
 
     }
 
+    void TextureLightCube::format_src_color(Color& src_color) {
+
+        if(src_color.r == 0.0f)
+            src_color.r = 0.1f;
+
+        if(src_color.g == 0.0f)
+            src_color.g = 0.1f;
+
+        if(src_color.b == 0.0f)
+            src_color.b = 0.1f;
+
+    }
     void TextureLightCube::init_mesh(float* vertices , int sizeof_vertices) {
 
             glGenVertexArrays(1 , &VAO);
@@ -162,6 +177,7 @@ namespace Shape {
                 "light.ambient",
                 light_property.ambient
                 );
+
 
         m_shader->setVec3(
                 "light.diffuse",
