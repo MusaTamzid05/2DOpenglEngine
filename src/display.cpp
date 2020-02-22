@@ -10,6 +10,7 @@
 #include "camera.h"
 #include <iostream>
 #include "rotate.h"
+#include "texture_holder.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -40,22 +41,34 @@ namespace OpenGL {
         cube->set_color(Shape::Color(1.0 , 0.0 , 0.0));
         shapes.push_back(cube);
 
+        texture_manager = new TextureManager();
+        texture_manager->add("container2" , "../res/container2.png");
+        texture_manager->add("container2_specular" , "../res/container2_specular.png");
+
+        texture_manager->show();
+
+        std::vector<std::string> texture_names;
+        texture_names.push_back("container2");
+        texture_names.push_back("container2_specular");
 
         shapes.push_back(
                 new Shape::TextureLightCube(
                     cube,
                     m_camera,
-                    "../res/container2.png"
+                    texture_manager,
+                    texture_names
                     )
                 );
+
     }
 
     Display::~Display() {
 
         if(m_window)
             glfwTerminate();
-    }
 
+        delete texture_manager;
+    }
 
     void Display::init_window( const std::string& title ) {
 
