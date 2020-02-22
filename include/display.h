@@ -13,6 +13,7 @@ namespace OpenGL {
 
     class Camera;
     class InputHandler;
+    class TextureManager;
 
 
     class Display {
@@ -67,6 +68,7 @@ namespace OpenGL {
             float lastFrame;
 
             InputHandler* input_handler;
+            TextureManager* texture_manager;
 
     };
 

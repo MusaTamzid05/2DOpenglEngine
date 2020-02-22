@@ -9,12 +9,37 @@ namespace Shape {
     TextureLightCube::TextureLightCube(
             Shape* src,
             OpenGL::Camera* camera,
-            const std::string& texture_path
+            OpenGL::TextureManager* texture_manager,
+            const std::string& texture_name 
             ):
             LightCube(src),
             m_camera(camera),
             material(),
-            light_property(){
+            light_property()
+    {
+        std::vector<std::string> texture_names;
+        texture_names.push_back(texture_name);
+        init_data(texture_manager , texture_names);
+    }
+
+
+    TextureLightCube::TextureLightCube(Shape* src ,
+            OpenGL::Camera* camera,
+            OpenGL::TextureManager* texture_manager,
+            std::vector<std::string> texture_names):
+            LightCube(src),
+            m_camera(camera),
+            material(),
+            light_property() {
+                init_data(texture_manager , texture_names);
+    }
+
+    TextureLightCube::~TextureLightCube() {
+
+    }
+
+    void TextureLightCube::init_data(OpenGL::TextureManager* texture_manager, std::vector<std::string> texture_names) {
+
         float vertices[] = {
                         // positions          // normals           // texture coords
                         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
@@ -71,7 +96,10 @@ namespace Shape {
         glm::vec3 light_color(src_color.r , src_color.g , src_color.b);
 
         glm::vec3 diffuseColor = light_color * glm::vec3(0.8);
-        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2);
+        glm::vec3 ambientColor = light_color;
+
+        Util::print_vec3(ambientColor);
+        Util::print_vec3(diffuseColor);
 
 
         light_property.ambient = ambientColor;
@@ -84,26 +112,64 @@ namespace Shape {
                 1.0
                 );
 
-        m_texture_holder = new OpenGL::TextureHolder(texture_path , m_shader);
+        for(std::string texture_name : texture_names) {
+            OpenGL::TextureData* texture_data = texture_manager->get(texture_name);
 
-    }
+            if(texture_data == nullptr) {
+                std::cerr << "Texture " << texture_name << " not loaded for texture_cube.\n";
+                continue;
+            }
 
-    TextureLightCube::~TextureLightCube() {
-
+            texture_data_list.push_back(texture_data);
+            
+        }
     }
 
     void TextureLightCube::format_src_color(Color& src_color) {
 
-        if(src_color.r == 0.0f)
-            src_color.r = 0.1f;
+        // if one color value is to higher than others,
+        // that it causes serious issue when in texture
+        // so here we make all values of the color
+        // closer to each other.
+        // here we we the highest value just
+        // higher than others
 
-        if(src_color.g == 0.0f)
-            src_color.g = 0.1f;
+        std::vector<float> color_values;
+        color_values.push_back(src_color.r);
+        color_values.push_back(src_color.g);
+        color_values.push_back(src_color.b);
 
-        if(src_color.b == 0.0f)
-            src_color.b = 0.1f;
+        float max_value = -1000.0f;
+
+        for(unsigned int i = 0 ; i < color_values.size() ; i++) {
+            if(color_values[i] > max_value) {
+                max_value = color_values[i];
+                continue;
+            }
+        }
+
+        if(src_color.r == max_value) {
+            src_color.r = max_value + 0.2;
+        } else {
+            src_color.r = max_value;
+        }
+
+        if(src_color.g == max_value) {
+            src_color.g = max_value + 0.2;
+        } else {
+            src_color.g = max_value;
+        }
+
+
+        if(src_color.b == max_value) {
+            src_color.b = max_value + 0.2;
+        } else {
+            src_color.b = max_value;
+        }
 
     }
+
+
     void TextureLightCube::init_mesh(float* vertices , int sizeof_vertices) {
 
             glGenVertexArrays(1 , &VAO);
@@ -158,14 +224,14 @@ namespace Shape {
                 material.ambient
                 );
 
-        m_shader->setVec3(
+        m_shader->setInt(
                 "material.diffuse",
-                material.diffuse
+                0
                 );
 
-        m_shader->setVec3(
+        m_shader->setInt(
                 "material.specular",
-                material.specular
+                1
                 );
 
         m_shader->setFloat(
@@ -190,7 +256,10 @@ namespace Shape {
                 );
 
         Shape::draw(projection , view);
-        m_texture_holder->bind();
+
+        for(unsigned int i = 0 ; i < texture_data_list.size() ; i++)
+            texture_data_list[i]->bind(i);
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES , 0 , 36);
     }

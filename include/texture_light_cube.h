@@ -12,7 +12,8 @@
 
 namespace OpenGL {
     class Camera;
-    class TextureHolder;
+    class TextureManager;
+    struct TextureData;
 };
 
 
@@ -26,8 +27,13 @@ namespace Shape {
 
             TextureLightCube(Shape* src ,
                     OpenGL::Camera* camera,
-                    const std::string& texture_path);
+                    OpenGL::TextureManager* texture_manager,
+                    const std::string& texture_name);
 
+            TextureLightCube(Shape* src ,
+                    OpenGL::Camera* camera,
+                    OpenGL::TextureManager* texture_manager,
+                    std::vector<std::string> texture_names);
 
             virtual ~TextureLightCube();
 
@@ -36,16 +42,21 @@ namespace Shape {
 
         protected:
 
+
+            void init_data(  
+                    OpenGL::TextureManager* texture_manager,
+                    std::vector<std::string> texture_names);
+
             virtual void init_mesh(float* vertices , int sizeof_vertices);
 
             Material material;
             OpenGL::Camera* m_camera;
             LightProperty light_property;
 
-            OpenGL::TextureHolder * m_texture_holder;
 
 
             void format_src_color(Color& src_color);
+            std::vector<OpenGL::TextureData*> texture_data_list;
 
     };
 };
