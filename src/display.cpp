@@ -63,18 +63,20 @@ namespace OpenGL {
         texture_names.push_back("container2_specular");
 
         int total_cubes = 10;
+        float angle = 20.0;
 
-        for(unsigned int i = 0 ; i < total_cubes ; i++) 
-            shapes.push_back(
-                    new Shape::TextureLightCube(
+        for(unsigned int i = 0 ; i < total_cubes ; i++)  {
+            Shape::Shape* shape = new Shape::TextureLightCube(
                         cube,
                         m_camera,
                         "../shaders/texture_light_cube.vs",
                         "../shaders/texture_light_cube.fs",
                         texture_manager,
                         texture_names
-                        )
-                    );
+                        );
+            shape->set_rotate(new Shape::Rotate(angle + i , cubePositions[i]));
+            shapes.push_back(shape);
+        }
 
     }
 
