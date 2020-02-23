@@ -60,6 +60,7 @@ set(SOURCE_FILES
     src/move_command_z_axis.cpp
     src/texture_light_cube.cpp
     src/direction_light_cube.cpp
+    src/point_light_cube.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

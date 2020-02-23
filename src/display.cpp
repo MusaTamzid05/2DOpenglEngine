@@ -227,7 +227,6 @@ namespace OpenGL {
 
             if(i != 0)
                 shapes[i]->set_pos(cubePositions[i - 1]);
-
             shapes[i]->draw(projection , view);
         }
 
