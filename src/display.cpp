@@ -4,7 +4,7 @@
 #include "input_handler.h"
 #include "ambient_cube.h"
 #include "material_cube.h"
-#include "texture_light_cube.h"
+#include "direction_light_cube.h"
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
@@ -66,11 +66,11 @@ namespace OpenGL {
         float angle = 20.0;
 
         for(unsigned int i = 0 ; i < total_cubes ; i++)  {
-            Shape::Shape* shape = new Shape::TextureLightCube(
+            Shape::Shape* shape = new Shape::DirectionLightCube(
                         cube,
                         m_camera,
-                        "../shaders/texture_light_cube.vs",
-                        "../shaders/texture_light_cube.fs",
+                        "../shaders/direction_light_cube.vs",
+                        "../shaders/direction_light_cube.fs",
                         texture_manager,
                         texture_names
                         );
