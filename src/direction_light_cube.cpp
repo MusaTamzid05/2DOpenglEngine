@@ -22,6 +22,8 @@ namespace Shape {
                 texture_names
                 ) {
 
+                m_shader->use();
+                m_shader->setVec3("light.direction" ,camera->Position);
             }
 
     void DirectionLightCube::draw(const glm::mat4& projection , const  glm::mat4 view) {
@@ -34,12 +36,6 @@ namespace Shape {
         // cannot be serious !!! position
         //  are r , g , b value !!!!
 
-
-        m_shader->setVec3("light.position" ,
-                light_pos.r,
-                light_pos.g,
-                light_pos.b
-                );
 
         m_shader->setVec3(
                 "material.ambient",
