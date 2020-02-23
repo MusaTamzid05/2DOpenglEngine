@@ -27,11 +27,15 @@ namespace Shape {
 
             TextureLightCube(Shape* src ,
                     OpenGL::Camera* camera,
+                    const std::string& vertex_shader_path,
+                    const std::string& fragment_shader_path,
                     OpenGL::TextureManager* texture_manager,
                     const std::string& texture_name);
 
             TextureLightCube(Shape* src ,
                     OpenGL::Camera* camera,
+                    const std::string& vertex_shader_path,
+                    const std::string& fragment_shader_path,
                     OpenGL::TextureManager* texture_manager,
                     std::vector<std::string> texture_names);
 
@@ -45,6 +49,8 @@ namespace Shape {
 
             void init_data(  
                     OpenGL::TextureManager* texture_manager,
+                    const std::string& vertex_shader_path,
+                    const std::string& fragment_shader_path,
                     std::vector<std::string> texture_names);
 
             virtual void init_mesh(float* vertices , int sizeof_vertices);

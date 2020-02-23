@@ -55,6 +55,8 @@ namespace OpenGL {
                 new Shape::TextureLightCube(
                     cube,
                     m_camera,
+                    "../shaders/texture_light_cube.vs",
+                    "../shaders/texture_light_cube.fs",
                     texture_manager,
                     texture_names
                     )

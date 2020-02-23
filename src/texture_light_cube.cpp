@@ -9,6 +9,8 @@ namespace Shape {
     TextureLightCube::TextureLightCube(
             Shape* src,
             OpenGL::Camera* camera,
+            const std::string& vertex_shader_path,
+            const std::string& fragment_shader_path,
             OpenGL::TextureManager* texture_manager,
             const std::string& texture_name 
             ):
@@ -19,26 +21,34 @@ namespace Shape {
     {
         std::vector<std::string> texture_names;
         texture_names.push_back(texture_name);
-        init_data(texture_manager , texture_names);
+        init_data(texture_manager ,
+                vertex_shader_path ,
+                fragment_shader_path ,
+                texture_names);
     }
 
 
     TextureLightCube::TextureLightCube(Shape* src ,
             OpenGL::Camera* camera,
+            const std::string& vertex_shader_path,
+            const std::string& fragment_shader_path,
             OpenGL::TextureManager* texture_manager,
             std::vector<std::string> texture_names):
             LightCube(src),
             m_camera(camera),
             material(),
             light_property() {
-                init_data(texture_manager , texture_names);
+                init_data(texture_manager , vertex_shader_path , fragment_shader_path , texture_names);
     }
 
     TextureLightCube::~TextureLightCube() {
 
     }
 
-    void TextureLightCube::init_data(OpenGL::TextureManager* texture_manager, std::vector<std::string> texture_names) {
+    void TextureLightCube::init_data(OpenGL::TextureManager* texture_manager,
+            const std::string& vertex_shader_path,
+            const std::string& fragment_shader_path,
+            std::vector<std::string> texture_names) {
 
         float vertices[] = {
                         // positions          // normals           // texture coords
@@ -87,8 +97,8 @@ namespace Shape {
         
         init(vertices ,
                 sizeof(vertices) ,
-                "../shaders/texture_light_cube.vs" ,
-                "../shaders/texture_light_cube.fs"
+                vertex_shader_path.c_str(),
+                fragment_shader_path.c_str()
                 );
         Color src_color = src->get_color();
         format_src_color(src_color);
