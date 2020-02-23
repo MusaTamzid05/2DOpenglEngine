@@ -16,6 +16,18 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+glm::vec3 cubePositions[] = {
+	glm::vec3( 0.0f,  0.0f,  0.0f),
+	glm::vec3( 2.0f,  5.0f, -15.0f),
+	glm::vec3(-1.5f, -2.2f, -2.5f),
+	glm::vec3(-3.8f, -2.0f, -12.3f),
+	glm::vec3( 2.4f, -0.4f, -3.5f),
+	glm::vec3(-1.7f,  3.0f, -7.5f),
+	glm::vec3( 1.3f, -2.0f, -2.5f),
+	glm::vec3( 1.5f,  2.0f, -2.5f),
+	glm::vec3( 1.5f,  0.2f, -1.5f),
+	glm::vec3(-1.3f,  1.0f, -1.5f)
+};
 
 namespace OpenGL {
 
@@ -36,7 +48,6 @@ namespace OpenGL {
         init_window(title);
 
         Shape::Cube* cube = new Shape::Cube(Shape::Color(1.0 , 1.0 , 1.0));
-        cube->set_rotate(new Shape::Rotate(Shape::Rotate::AXIS::X, 139));
         cube->set_pos(glm::vec3(1.0 , 0.0 , 2.0));
         cube->set_color(Shape::Color(1.0 , 0.0 , 0.0));
         shapes.push_back(cube);
@@ -51,16 +62,19 @@ namespace OpenGL {
         texture_names.push_back("container2");
         texture_names.push_back("container2_specular");
 
-        shapes.push_back(
-                new Shape::TextureLightCube(
-                    cube,
-                    m_camera,
-                    "../shaders/texture_light_cube.vs",
-                    "../shaders/texture_light_cube.fs",
-                    texture_manager,
-                    texture_names
-                    )
-                );
+        int total_cubes = 10;
+
+        for(unsigned int i = 0 ; i < total_cubes ; i++) 
+            shapes.push_back(
+                    new Shape::TextureLightCube(
+                        cube,
+                        m_camera,
+                        "../shaders/texture_light_cube.vs",
+                        "../shaders/texture_light_cube.fs",
+                        texture_manager,
+                        texture_names
+                        )
+                    );
 
     }
 
@@ -193,8 +207,6 @@ namespace OpenGL {
         glClearColor(0.2f , 0.3f , 0.3f , 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // this should be inside loop, will
-        // change it as soon as we have a camera
         
         glm::mat4 view = glm::mat4(1.0f);
         glm::mat4 projection = glm::mat4(1.0f);
@@ -209,6 +221,7 @@ namespace OpenGL {
         view = m_camera->GetViewMatrix();
 
         for(unsigned int i = 0 ; i < shapes.size() ; i++)  {
+            shapes[i]->set_pos(cubePositions[i]);
             shapes[i]->draw(projection , view);
         }
 

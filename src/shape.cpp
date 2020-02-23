@@ -42,15 +42,10 @@ namespace Shape {
         glm::mat4 model_after_rotate = model;
 
         if(m_rotate)  {
-            if(m_rotate->axis == Rotate::AXIS::X)
-                model_after_rotate = glm::rotate(model_after_rotate , m_rotate->angle , glm::vec3(1.0f , 0.0f , 0.0f));
-
-            else if(m_rotate->axis == Rotate::AXIS::Y)
-                model_after_rotate = glm::rotate(model_after_rotate , m_rotate->angle , glm::vec3(0.0f , 1.0f , 0.0f));
-
-
-            else if(m_rotate->axis == Rotate::AXIS::Z)
-                model_after_rotate = glm::rotate(model_after_rotate , m_rotate->angle , glm::vec3(0.0f , 0.0f , 1.0f));
+            model_after_rotate = glm::rotate(
+                    model_after_rotate ,
+                    glm::radians(m_rotate->angle),
+                    m_rotate->vec);
         }
 
         m_shader->setMat4("model" ,  model_after_rotate);

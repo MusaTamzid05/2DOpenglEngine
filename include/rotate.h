@@ -2,29 +2,14 @@
 #define ROTATE_H
 
 #include <iostream>
-
+#include <glm/glm.hpp>
 namespace Shape {
 
     struct Rotate {
-
-        enum AXIS {
-            X,
-            Y,
-            Z
-        };
-
+        Rotate(float angle , const  glm::vec3& vec);
         float angle;
-        AXIS axis;
-
-        Rotate(AXIS axis ,float  angle):
-            axis(axis) , 
-            angle(angle){}
-
-
-
-
+        glm::vec3 vec;
     };
-
 
     std::ostream& operator<<(std::ostream& out , const Rotate& rotate);
 };
