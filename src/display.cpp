@@ -4,7 +4,7 @@
 #include "input_handler.h"
 #include "ambient_cube.h"
 #include "material_cube.h"
-#include "direction_light_cube.h"
+#include "point_light_cube.h"
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
@@ -65,12 +65,12 @@ namespace OpenGL {
         int total_cubes = 10;
         float angle = 20.0;
 
-        for(unsigned int i = 0 ; i < total_cubes ; i++)  {
-            Shape::Shape* shape = new Shape::DirectionLightCube(
+        for(unsigned int i = 1 ; i <= total_cubes ; i++)  {
+            Shape::Shape* shape = new Shape::PointLightCube(
                         cube,
                         m_camera,
-                        "../shaders/direction_light_cube.vs",
-                        "../shaders/direction_light_cube.fs",
+                        "../shaders/point_light_cube.vs",
+                        "../shaders/point_light_cube.fs",
                         texture_manager,
                         texture_names
                         );
@@ -224,7 +224,10 @@ namespace OpenGL {
         view = m_camera->GetViewMatrix();
 
         for(unsigned int i = 0 ; i < shapes.size() ; i++)  {
-            shapes[i]->set_pos(cubePositions[i]);
+
+            if(i != 0)
+                shapes[i]->set_pos(cubePositions[i - 1]);
+
             shapes[i]->draw(projection , view);
         }
 
